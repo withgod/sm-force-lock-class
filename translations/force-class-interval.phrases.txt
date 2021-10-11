@@ -1,0 +1,14 @@
+"Phrases"
+{
+	"msg1"
+	{
+		"#format"   "{1:s},{2:s}"
+		"en"		"pick {1}. need more \"{1}\" interval."
+		"jp"		"{1} を選ぶにはあと {2} 間隔を開ける必要があります。"
+	}
+	"msg2"
+	{
+		"en"		"Auth type must be either 'steam', 'name', or 'ip'."
+		"jp"		"Auth type must be either 'steam', 'name', or 'ip'."
+	}
+}
