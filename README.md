@@ -10,7 +10,7 @@ this plugin forces Sniper / Spy  intervals.
 ### extract zip
 
 ```
-unzip -d /path/to/tf/addons/sourcemod ./sm-force-lock-slass.zip
+unzip -d /path/to/tf/addons/sourcemod ./sm-force-lock-class_0.0.0.zip
 ```
 
 ### add your database.cfg
@@ -35,4 +35,4 @@ vim /path/to/tf/addons/sourcemod/configs/databases.cfg
 ## links
 
 * https://withgod.hatenablog.com/entry/2021/10/12/012116
-* 
+
