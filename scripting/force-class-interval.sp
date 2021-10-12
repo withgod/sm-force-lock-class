@@ -21,7 +21,6 @@ public Plugin:myinfo =
 	url = "http://github.com/withgod/sm-force-class-interval"
 };
 
-
 public void UpdateHistory(int result_id)
 {
 	if (GetConVarBool(fciDebug))
@@ -36,7 +35,9 @@ public void UpdateHistory(int result_id)
 		SQL_GetError(db, error, sizeof(error));
 		LogError("[FCI] Failed to query (error: %s)", error);
 	}
-}public void UpdateHistoryByUserId(int userid)
+}
+
+public void UpdateHistoryByUserId(int userid)
 {
 	new String:steamid[PLATFORM_MAX_PATH];
 
