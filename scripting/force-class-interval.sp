@@ -4,7 +4,7 @@
 #include <tf2>
 #include <tf2_stocks>
 
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.3"
 #define DB_IDENTIFER "force-class-interval"
 
 String:currentMap[PLATFORM_MAX_PATH];
@@ -26,7 +26,7 @@ public void UpdateHistory(int result_id)
 	if (GetConVarBool(fciDebug))
 		PrintToServer("[FCI] Fn UpdateHistory");
 	new String:sql[PLATFORM_MAX_PATH];
-	Format(sql, sizeof(sql), "update history set updated_at = CURRENT_TIMESTAMP, map = '%s' where id = %d", currentMap, result_id);
+	Format(sql, sizeof(sql), "update history set updated_at = CURRENT_TIMESTAMP, map = '%s', cnt = cnt + 1 where id = %d", currentMap, result_id);
 	if (GetConVarBool(fciDebug))
 		PrintToServer("[FCI] update updated_at [%s]", sql);
 	if (!SQL_FastQuery(db, sql)) 
@@ -50,7 +50,7 @@ public void UpdateHistoryByUserId(int userid)
 	}
 
 	new String:sql[PLATFORM_MAX_PATH];
-	Format(sql, sizeof(sql), "update history set updated_at = CURRENT_TIMESTAMP, map = '%s' where user_id = %d and class_id = %d", currentMap, steamid, current_class);
+	Format(sql, sizeof(sql), "update history set updated_at = CURRENT_TIMESTAMP, map = '%s', cnt = cnt + 1 where user_id = %d and class_id = %d", currentMap, steamid, current_class);
 	if (GetConVarBool(fciDebug))
 		PrintToServer("[FCI] update updated_at [%s]", sql);
 	if (!SQL_FastQuery(db, sql)) 
