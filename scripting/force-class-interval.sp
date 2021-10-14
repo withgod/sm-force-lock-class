@@ -119,7 +119,7 @@ public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast
 		PrintToServer("[FCI] client[%d][%s] spawn for team[%d]class[%d]", userid, steamid, teamid, current_class);
 
 	new String:sql1[PLATFORM_MAX_PATH];
-	Format(sql1, sizeof(sql1), "select id, user_id, class_id, map, updated_at, strftime('%%s', updated_at) from history where user_id = '%s' and class_id = %d limit 1", steamid, current_class);
+	Format(sql1, sizeof(sql1), "select id, user_id, class_id, map, cnt, updated_at, strftime('%%s', updated_at) from history where user_id = '%s' and class_id = %d limit 1", steamid, current_class);
 	//PrintToServer("[FCI] query[%s]", sql1);
 
 	DBResultSet hQuery = SQL_Query(db, sql1);
@@ -149,7 +149,7 @@ public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast
     } 
 
 	new String:result_uid[PLATFORM_MAX_PATH], String:result_map[PLATFORM_MAX_PATH], String:result_updated[PLATFORM_MAX_PATH], String:result_updated_tmp[PLATFORM_MAX_PATH];
-	int result_id, result_class, result_updatedInt;
+	int result_id, result_class, result_cnt, result_updatedInt;
 
 	SQL_FetchRow(hQuery); // limit 1
 
@@ -157,11 +157,13 @@ public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast
 	SQL_FetchString(hQuery, 1, result_uid, sizeof(result_uid));
 	result_class = SQL_FetchInt(hQuery, 2);
 	SQL_FetchString(hQuery, 3, result_map, sizeof(result_map));
-	SQL_FetchString(hQuery, 4, result_updated, sizeof(result_updated));
-	SQL_FetchString(hQuery, 5, result_updated_tmp, sizeof(result_updated_tmp));
+	result_cnt = SQL_FetchInt(hQuery, 4);
+	SQL_FetchString(hQuery, 5, result_updated, sizeof(result_updated));
+	SQL_FetchString(hQuery, 6, result_updated_tmp, sizeof(result_updated_tmp));
 	result_updatedInt = StringToInt(result_updated_tmp);
 	if (GetConVarBool(fciDebug))
-		PrintToServer("[FCI] result uid[%s]class[%d]map[%s]date[%s/%d] / current map[%s] current class[%d]", result_uid, result_class, result_map, result_updated, result_updatedInt, currentMap, current_class);
+		PrintToServer("[FCI] result uid[%s]class[%d]map[%s]cnt[%d]date[%s/%d] / current map[%s] current class[%d]", 
+			result_uid, result_class, result_map, result_cnt, result_updated, result_updatedInt, currentMap, current_class);
 
 	// same map on preview spawn or not suck class.
 	if (

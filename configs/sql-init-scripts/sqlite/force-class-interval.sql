@@ -1,6 +1,6 @@
 /* confirmed only sqlite3 */
 
--- alter history add count integer not null default 0 after map;
+-- alter table history add cnt integer not null default 0;
 create table history(
 id integer primary key AUTOINCREMENT,
 user_id text not null,
